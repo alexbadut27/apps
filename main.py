@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
-data_ship = Path(__file__).parents[1] / 'C:\data\ship_data.csv'
+data_ship = Path(__file__).parents[1] / 'data\ship_data.csv'
 header = st.container()
 dataset = st.container()
 features = st.container()
