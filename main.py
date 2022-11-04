@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
+from pathlib import Path
 
+garret_burhenn_pitches_csv = Path(__file__).parents[2] / 'data\ship_data.csv'
 header = st.container()
 dataset = st.container()
 features = st.container()
