@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
-data_ship_2 = Path(__file__).parents[1] / 'C:\data\ship_data.csv'
+data_ship = Path(__file__).parents[1] / 'C:\data\ship_data.csv'
 header = st.container()
 dataset = st.container()
 features = st.container()
@@ -17,7 +17,7 @@ with header:
 with dataset:
     st.header('Port data across the globe')
     st.text('The data has been provided by the local carriers')
-    data_ship = pd.read_csv('data\ship_data.csv')
+
     st.write(data_ship.head())
     number_one = pd.DataFrame(data_ship['Country'].value_counts())
     st.text('The most used country')
