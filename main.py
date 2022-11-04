@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
-from pathlib import Path
 
-data_ship = Path(__file__).parents[1] / 'data\ship_data.csv'
 header = st.container()
 dataset = st.container()
 features = st.container()
@@ -17,7 +15,8 @@ with header:
 with dataset:
     st.header('Port data across the globe')
     st.text('The data has been provided by the local carriers')
-
+    data_ship = pd.read_csv('apps/data/ship_data.csv')
+    st.write(data_ship.head())
     number_one = pd.DataFrame(data_ship['Country'].value_counts())
     st.text('The most used country')
     st.bar_chart(number_one)
@@ -42,5 +41,3 @@ with model_training:
 
 sel_col, disp_col = st.columns(2)
 max_depth = sel_col.slider('Da si mie o nota',min_value=1,max_value=5,value=1)
-
-
