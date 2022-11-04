@@ -18,7 +18,6 @@ with dataset:
     st.header('Port data across the globe')
     st.text('The data has been provided by the local carriers')
 
-    st.write(data_ship.head())
     number_one = pd.DataFrame(data_ship['Country'].value_counts())
     st.text('The most used country')
     st.bar_chart(number_one)
