@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os 
-dir_name = os.path.abspath(os.path.dirname(__file__))
+dir_name = os.path.abspath(os.path.dirname("D:\pythonProject\data\ship_data.csv"))
 location = os.path.join(dir_name, 'ship_data.csv')
 
 header = st.container()
@@ -18,7 +18,7 @@ with header:
 with dataset:
     st.header('Port data across the globe')
     st.text('The data has been provided by the local carriers')
-    data_ship = pd.read_csv("D:\pythonProject\data\ship_data.csv")
+    data_ship = pd.read_csv(location)
     st.write(data_ship.head())
     number_one = pd.DataFrame(data_ship['Country'].value_counts())
     st.text('The most used country')
