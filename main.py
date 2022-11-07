@@ -1,5 +1,8 @@
 import streamlit as st
 import pandas as pd
+from pathlib import Path
+
+ data_2= Path(__file__).parents[1] / 'data/ship_data.csv'
 
 header = st.container()
 dataset = st.container()
