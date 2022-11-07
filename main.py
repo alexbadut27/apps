@@ -3,7 +3,7 @@ import pandas as pd
 import os 
 from pathlib import Path
 
-data_ship_csv = Path('D:\pythonProject').parents[0] / 'ship_data.csv'
+data_ship_csv = Path('D:\pythonProject\data').parents[0] / 'ship_data.csv'
 
 header = st.container()
 dataset = st.container()
