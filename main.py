@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
 import os 
-path = os.path.dirname(__file__)
-my_file = path+'D:\pythonProject\data\ship_data.csv'
+dir_name = os.path.abspath(os.path.dirname(__file__))
+location = os.path.join(dir_name, 'ship_data.csv')
 
 header = st.container()
 dataset = st.container()
