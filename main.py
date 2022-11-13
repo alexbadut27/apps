@@ -3,7 +3,6 @@ import pandas as pd
 import os 
 from pathlib import Path
 
-data_ship_csv = Path('D:\pythonProject\data').parents[0] / 'ship_data.csv'
 
 header = st.container()
 dataset = st.container()
@@ -19,7 +18,7 @@ with header:
 with dataset:
     st.header('Port data across the globe')
     st.text('The data has been provided by the local carriers')
-    data_ship = pd.read_csv(data_ship_csv)
+    data_ship = pd.read_csv(data/ship_data.csv)
     st.write(data_ship.head())
     number_one = pd.DataFrame(data_ship['Country'].value_counts())
     st.text('The most used country')
