@@ -1,47 +1,59 @@
+"""Run 'streamlit run app.py' in the terminal to start the app.
+"""
 import streamlit as st
-import pandas as pd
-import os 
-from pathlib import Path
+
+# st.set_page_config(layout="wide")
+
+"# leafmap streamlit demo"
+st.markdown('Source code: <https://github.com/giswqs/leafmap-streamlit/blob/master/app.py>')
+
+"## Create a 3D map using Kepler.gl"
+with st.echo():
+    import streamlit as st
+    import leafmap.kepler as leafmap
+
+    m = leafmap.Map(center=[37.7621, -122.4143], zoom=12)
+    in_csv = 'https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/hex_data.csv'
+    config = 'https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/hex_config.json'
+    m.add_csv(in_csv, layer_name="hex_data", config=config)
+    m.to_streamlit()
 
 
-header = st.container()
-dataset = st.container()
-features = st.container()
-model_training = st.container()
+"## Create a heat map"
+with st.echo():
+    import leafmap.foliumap as leafmap
 
-with header:
-    st.markdown("<h1 style='text-align: center; color: Green;'>Ships tracker around the globe</h1>",
-                unsafe_allow_html=True)
-    # allign the title and make it how i wanted
-    st.markdown("<h2 style='text-align: center; color: black;'>Aerospace team </h2>", unsafe_allow_html=True)
-    st.text('Using this app we can see the shipments that are going in real time across the GLOBE')
-with dataset:
-    st.header('Port data across the globe')
-    st.text('The data has been provided by the local carriers')
-    data_ship = pd.read_csv(data/ship_data.csv)
-    st.write(data_ship.head())
-    number_one = pd.DataFrame(data_ship['Country'].value_counts())
-    st.text('The most used country')
-    st.bar_chart(number_one)
+    filepath = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
+    m = leafmap.Map(tiles='stamentoner')
+    m.add_heatmap(filepath, latitude="latitude", longitude='longitude', value="pop_max", name="Heat map", radius=20)
+    m.to_streamlit(width=700, height=500, add_layer_control=True)
+    
+
+"## Load a GeoJSON file"
+with st.echo():
+
+    m = leafmap.Map(center=[0, 0], zoom=2)
+    in_geojson = 'https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/cable-geo.geojson'
+    m.add_geojson(in_geojson, layer_name="Cable lines")
+    m.to_streamlit()
 
 
-with features:
-    st.header('Aici as vrea sa pun ceva ML')
-    st.markdown('* **Daca am reusit** Bem o bere de fericire')
-    st.markdown('* **Daca nu am reusit** Tot bem o bere')
-    st.map()
+"## Add a colorbar"
+with st.echo():
+
+    m = leafmap.Map()
+    m.add_basemap('USGS 3DEP Elevation')
+    colors = ['006633', 'E5FFCC', '662A00', 'D8D8D8', 'F5F5F5']
+    vmin = 0
+    vmax = 4000
+    m.add_colorbar(colors=colors, vmin=vmin, vmax=vmax)
+    m.to_streamlit()
 
 
-with model_training:
-    st.header('Aici am vrut sa fac un buton')
-    if st.button('Apasa-ma'):
+"## Change basemaps"
+with st.echo():
+    m = leafmap.Map()
+    m.add_basemap("Esri.NatGeoWorldMap")
+    m.to_streamlit()
 
-        st.write('Sugi pula')  # displayed when the button is clicked
-
-    else:
-
-        st.write('un mic cadou')  # displayed when the button is unclicked
-
-sel_col, disp_col = st.columns(2)
-max_depth = sel_col.slider('Da si mie o nota',min_value=1,max_value=5,value=1)
 
